@@ -17,4 +17,10 @@ public class FabelApplication {
 	public String rootRouter(){
 		return "Alive";
 	}
+
+	@GetMapping("/test_connection")
+	public String testConnection(){
+		System.out.println("Aqui2");
+		return "Alive";
+	}
 }
