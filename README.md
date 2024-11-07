@@ -31,7 +31,7 @@ ___
 
 1. Raises all the services necessary to run the program with docker compose
 ```bash
-    docker compose up  
+    docker compose -f docker/docker-compose.yml up  
 ```
 
 ### How to connect with database
