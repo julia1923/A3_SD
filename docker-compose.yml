@@ -1,0 +1,23 @@
+services:
+  web:
+    image: fabelWeb
+    build: . 
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    
+  db:
+    image: mysql:latest
+    container_name: fabel-db
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - fabel-db:/var/lib/mysql
+volumes:
+  fabel-db:

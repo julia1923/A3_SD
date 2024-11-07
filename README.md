@@ -13,7 +13,7 @@
     ``` 
 ___
 
-### How to run the project
+### How to run the project without docker
 
 
 1. cleans up old files, compiles the code, runs the tests, and installs the artifact in the local repository.
@@ -27,3 +27,19 @@ ___
     ```
 ___
 
+### How to run the project with docker
+
+1. Raises all the services necessary to run the program with docker compose
+```bash
+    docker compose up  
+```
+
+### How to connect with database
+1. using mysql client
+    - To install 
+    - ``` sudo apt install mysql-client```
+    - To Connect 
+    - ``` mysql -h [host] -u [user] -p ```
+    
+2. by container
+    - ``` docker exec -it [container_name] mysql -u root -p```
