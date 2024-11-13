@@ -1,18 +1,16 @@
 services:
-  web:
-    build: 
-      context: ".." 
-      dockerfile: "docker/Dockerfile"
-    ports:
-      - "8080:8080"
-    depends_on:
-      - db
+  # web:
+  #   build: 
+  #     context: ".." 
+  #     dockerfile: "docker/Dockerfile"
+  #   ports:
+  #     - "8080:8080"
+  #   depends_on:
+  #     - db
 
   dbeaver:
     image: dbeaver/cloudbeaver:latest 
     container_name: dbeaver
-    build: 
-      context: ".." 
     env_file:
       - ../.env
     environment:
