@@ -6,6 +6,10 @@
     ```bash
         java -version
      ``` 
+    - Install java in codespace
+    ```bash
+        sdk install java 21.0.5-oracle
+    ```
 - Have maven installed
     - to check the installation:
     ```bash 
