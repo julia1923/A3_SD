@@ -1,12 +1,16 @@
 services:
-  # web:
-  #   build: 
-  #     context: ".." 
-  #     dockerfile: "docker/Dockerfile"
-  #   ports:
-  #     - "8080:8080"
-  #   depends_on:
-  #     - db
+  web:
+    build: 
+      context: ".." 
+      dockerfile: "docker/Dockerfile"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/teste
+      - SPRING_DATASOURCE_USERNAME=teste
+      - SPRING_DATASOURCE_PASSWORD=teste
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
 
   dbeaver:
     image: dbeaver/cloudbeaver:latest 
