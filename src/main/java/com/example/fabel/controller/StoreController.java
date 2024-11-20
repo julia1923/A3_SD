@@ -3,7 +3,6 @@ package com.example.fabel.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,40 +28,48 @@ public class StoreController {
     StoreRepository storeRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    GameRepository gameRepository;
 
     @GetMapping
     public List<Store> getAllStore(){
         return storeRepository.findAll();
     }
     
-    @PostMapping
+    @PostMapping("/addNewStore")
     public Store addNewStore(@RequestBody Store store){
 
-        Users getUser = userRepository.findById(store).orElseThrow();
-        
-        Store addNewStore = new Store();
-        addNewStore.setUser(null);
+        Users getUser = userRepository.findById(store.getUser().getId()).orElseThrow();
+        Games getGame = gameRepository.findById(store.getGame().getId()).orElseThrow();
 
-        return userRepository.save(addNewGame);
+
+        Store addNewStore = new Store();
+        addNewStore.setUser(getUser);
+
+        addNewStore.setGame(getGame);
+
+        return storeRepository.save(addNewStore);
     }
 
-    @PutMapping
-    public Games updateGame(@RequestBody Games game){
-        Games getGame = gameRepository.findById(game.getId()).orElseThrow();
+    @PutMapping("/updateStore")
+    public Store updateStore(@RequestBody Store store){
 
-        Games updateGame = new Games();
-        updateGame.setName(getGame.getName());
-        updateGame.setPrice(getGame.getPrice());
-        updateGame.setImage(getGame.getImage());
+        Users getUser = userRepository.findById(store.getUser().getId()).orElseThrow();
+        Games getGame = gameRepository.findById(store.getGame().getId()).orElseThrow();
 
-        return gameRepository.save(updateGame);
+        Store updateStore = new Store();
+        updateStore.setUser(getUser);
+        updateStore.setGame(getGame);
+
+        return storeRepository.save(updateStore);
     }
     
-    @DeleteMapping
-    public Games deleteGame(@PathVariable Long id){
-        Games getGame = gameRepository.findById(id).orElseThrow();
-        gameRepository.delete(getGame);
 
-        return getGame;
+    @DeleteMapping("/deleteStore/{id}")
+    public Store deleteStore(@PathVariable Long id){
+        Store getStore = storeRepository.findById(id).orElseThrow();
+        storeRepository.delete(getStore);
+
+        return getStore;
     }
 }

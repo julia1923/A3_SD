@@ -2,3 +2,18 @@ GET http://localhost:8080/ HTTP/1.1
 
 ###
 GET http://localhost:8080/test_connection HTTP/1.1
+
+###
+GET http://localhost:8080/users/all HTTP/1.1
+
+###
+POST http://localhost:8080/users/create
+
+Content-Type: application/json
+
+{
+    "username" : "julia",
+    "email" : "julia@gmail.com",
+    "password" : 123,
+    "avatar" : ""  
+}
