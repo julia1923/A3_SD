@@ -23,12 +23,12 @@ public class GameController {
     @Autowired
     GameRepository gameRepository;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Games> getAllGames(){
         return gameRepository.findAll();
     }
     
-    @PostMapping
+    @PostMapping("/addNewGame")
     public Games addNewGame(@RequestBody Games game){
 
         Games addNewGame = new Games();
@@ -39,7 +39,7 @@ public class GameController {
         return gameRepository.save(addNewGame);
     }
 
-    @PutMapping
+    @PutMapping("/updateGame")
     public Games updateGame(@RequestBody Games game){
         Games getGame = gameRepository.findById(game.getId()).orElseThrow();
 
@@ -51,7 +51,7 @@ public class GameController {
         return gameRepository.save(updateGame);
     }
     
-    @DeleteMapping
+    @DeleteMapping ("/deleteGame/{id}")
     public Games deleteGame(@PathVariable Long id){
         Games getGame = gameRepository.findById(id).orElseThrow();
         gameRepository.delete(getGame);

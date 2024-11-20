@@ -31,7 +31,7 @@ public class StoreController {
     @Autowired
     GameRepository gameRepository;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Store> getAllStore(){
         return storeRepository.findAll();
     }

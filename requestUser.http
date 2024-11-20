@@ -7,13 +7,24 @@ GET http://localhost:8080/test_connection HTTP/1.1
 GET http://localhost:8080/users/all HTTP/1.1
 
 ###
-POST http://localhost:8080/users/create
-
+POST http://localhost:8080/users/create HTTP/1.1
 Content-Type: application/json
 
 {
     "username" : "julia",
     "email" : "julia@gmail.com",
+    "password" : 123,
+    "avatar" : ""  
+}
+
+###
+PUT http://localhost:8080/users/update HTTP/1.1
+Content-Type: application/json
+
+{
+    "id" : 2,
+    "username" : "ana",
+    "email" : "ana@gmail.com",
     "password" : 123,
     "avatar" : ""  
 }

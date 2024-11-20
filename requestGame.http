@@ -1,0 +1,32 @@
+GET http://localhost:8080/ HTTP/1.1
+
+###
+GET http://localhost:8080/test_connection HTTP/1.1
+
+###
+GET http://localhost:8080/games/all HTTP/1.1
+
+###
+POST http://localhost:8080/games/addNewGame HTTP/1.1
+Content-Type: application/json
+
+{
+    "name" : "lol",
+    "price" : 0,
+    "image" : ""
+}
+
+###
+PUT http://localhost:8080/games/updateGame HTTP/1.1
+Content-Type: application/json
+
+{
+    "id" : 1,
+     "name" : "valorant",
+    "price" : 0,
+    "image" : ""  
+}
+
+
+###
+DELETE http://localhost:8080/games/deleteGame/2 HTTP/1.1
