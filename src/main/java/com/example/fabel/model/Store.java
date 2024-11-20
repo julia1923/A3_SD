@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 @Entity
 @Table(name = "Store")
-
+@EqualsAndHashCode
 public class Store {
 
     @Id
