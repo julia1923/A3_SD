@@ -11,8 +11,8 @@ POST http://localhost:8080/users/create HTTP/1.1
 Content-Type: application/json
 
 {
-    "username" : "julia",
-    "email" : "julia@gmail.com",
+    "username" : "luzia",
+    "email" : "luzia@gmail.com",
     "password" : 123,
     "avatar" : ""  
 }
@@ -28,3 +28,8 @@ Content-Type: application/json
     "password" : 123,
     "avatar" : ""  
 }
+
+###
+PUT http://localhost:8080/users/updateAvatar
+Content-Type: multipart/form-data; boundary=---011000010111000001101001
+
