@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.fabel.repository.UserRepository;
 import com.example.fabel.model.Users;
@@ -66,24 +67,19 @@ public class UserController {
     }
 
     @PutMapping(value = "/updateAvatar", consumes = { "multipart/form-data" })
-    public ResponseEntity<?> updateAvatar(@RequestParam("id") Long id,@RequestParam("avatar") String avatar) {
+    public ResponseEntity<?> updateAvatar(@RequestParam("id") String idString, @RequestParam("avatar") MultipartFile avatar) throws IOException {
 
-    Users getUser = userRepository.findById(id).orElseThrow();
+        Long id = Long.parseLong(idString);
+        Users getUser = userRepository.findById(id).orElseThrow();
 
-    Users updateUser = new Users();
+        String avatarBase64 = Base64.getEncoder().encodeToString(avatar.getBytes());
 
-    String avatarBase64;    
-
-    byte[] avatarBytes = avatar.getBytes();
-    avatarBase64 = Base64.getEncoder().encodeToString(avatarBytes); // Codificar para Base64
-     // Salvar a string Base64 no banco de dados
-     
+        Users updateUser = new Users();
         updateUser.setId(getUser.getId());
         updateUser.setAvatar(avatarBase64);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(userRepository.save(updateUser));
-    
-}
+    }
 
 
     @DeleteMapping(value="/delete/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
@@ -91,5 +87,16 @@ public class UserController {
         Users getUser = userRepository.findById(id).orElseThrow();
         userRepository.delete(getUser);
         return getUser;
+    }
+
+    @GetMapping(value = "/sucess")
+    public String sucess() {
+
+        Long id = (long) 1;
+
+        Users getUser = userRepository.findById(id).orElseThrow();
+
+        String sla = "<img src="+getUser.getAvatar()+"/>";
+        return sla;
     }
 }
