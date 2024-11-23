@@ -78,6 +78,11 @@ public class UserController {
         updateUser.setId(getUser.getId());
         updateUser.setAvatar(avatarBase64);
 
+        if (avatar.getSize() > 5 * 1024 * 1024) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body("Avatar file is too large. Maximum size is 5MB.");
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(userRepository.save(updateUser));
     }
 
@@ -89,14 +94,20 @@ public class UserController {
         return getUser;
     }
 
-    @GetMapping(value = "/sucess")
-    public String sucess() {
+    @GetMapping(value="/find/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public Users findById(@PathVariable Long id){
+        Users getUser = userRepository.findById(id).orElseThrow();
+        return getUser;
+    }
 
-        Long id = (long) 1;
+    @GetMapping(value = "/success", produces = MediaType.TEXT_HTML_VALUE)
+    public String success() {
+        Long id = 1L;
 
         Users getUser = userRepository.findById(id).orElseThrow();
 
-        String sla = "<img src="+getUser.getAvatar()+"/>";
-        return sla;
+        String imageSrc = "data:image/jpeg;base64," + getUser.getAvatar();
+
+        return "<img src='" + imageSrc + "' alt='User Avatar' />";
     }
 }
