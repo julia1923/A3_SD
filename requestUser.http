@@ -11,9 +11,9 @@ POST http://localhost:8080/users/create HTTP/1.1
 Content-Type: application/json
 
 {
-    "username" : "luzia",
-    "email" : "luzia@gmail.com",
-    "password" : 123,
+    "username" : "julia",
+    "email" : "julia@gmail.com",
+    "password" : 12345,
     "avatar" : ""  
 }
 
@@ -22,7 +22,7 @@ PUT http://localhost:8080/users/update HTTP/1.1
 Content-Type: application/json
 
 {
-    "id" : 2,
+    "id" : 152,
     "username" : "ana",
     "email" : "ana@gmail.com",
     "password" : 123,
@@ -36,12 +36,12 @@ Content-Type: multipart/form-data; boundary=boundary
 --boundary
 Content-Disposition: form-data; name="id"
 
-1
+152
 --boundary
 Content-Disposition: form-data; name="avatar"; filename="avatar.png"
 Content-Type: image/png
 
-< /workspaces/A3_SD/png-homem-aranha.png
+< /workspaces/A3_SD/homem-ferro.png
 
 --boundary--
 
@@ -49,4 +49,4 @@ Content-Type: image/png
 GET http://localhost:8080/users/find/1 HTTP/1.1
 
 ###
-DELETE http://localhost:8080/users/delete/52 HTTP/1.1
+DELETE http://localhost:8080/users/delete/102 HTTP/1.1
