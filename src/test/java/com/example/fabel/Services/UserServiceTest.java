@@ -52,7 +52,11 @@ class UserControllerTest {
 
         when(userRepository.save(any(Users.class))).thenReturn(user);
 
-        assertNotNull(user);
+        Users createdUser = userRepository.save(user);
+
+
+        assertNotNull(createdUser);
+        assertEquals("newUser", createdUser.getUsername());
         verify(userRepository).save(any(Users.class));
     }
 
