@@ -1,18 +1,17 @@
 package com.example.fabel.Services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.fabel.controller.GameController;
@@ -31,6 +30,11 @@ public class GameServiceTest {
     @Mock
     private MultipartFile avatarFile;
 
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
+
     // Read
     @Test
     void testGetAllGames (){
@@ -41,25 +45,26 @@ public class GameServiceTest {
         assertNotNull(games);
         assertEquals(1, games.size());
         verify(gameRepository, times(1)).findAll();
-
     }
 
     // Create
     @Test
     void testCreateGame() {
         Games game = new Games();
-
         game.setName("newGame");
         game.setPrice(1.1);
         game.setImage("");
 
         when(gameRepository.save(any(Games.class))).thenReturn(game);
 
-        assertNotNull(game);
+        Games createdGame = gameRepository.save(game); // Chamar o método do controlador
+
+        assertNotNull(createdGame);
+        assertEquals("newGame", createdGame.getName());
         verify(gameRepository).save(any(Games.class));
     }
 
-    // Update
+    
     @Test
     void testUpdateGame(){
 
@@ -84,21 +89,21 @@ public class GameServiceTest {
         verify(gameRepository).save(any(Games.class));
 
     }
+      // Delete
 
-    // Delete
-
-    @Test
-    void testDeleteGame() {
-
-        Games game = new Games();
-
-        game.setId(1L);
-
-        when(gameRepository.findById(1L)).thenReturn(Optional.of(game));
-
-        var result = gameController.deleteGame(1L);
-
-        assertEquals(1L, result.getId());
-        verify(gameRepository, times(1)).findById(1L);
-    }
+      @Test
+      void testDeleteGame() {
+  
+          Games game = new Games();
+  
+          game.setId(1L);
+  
+          when(gameRepository.findById(1L)).thenReturn(Optional.of(game));
+  
+          var result = gameController.deleteGame(1L);
+  
+          assertEquals(1L, result.getId());
+          verify(gameRepository, times(1)).findById(1L);
+      }
 }
+
