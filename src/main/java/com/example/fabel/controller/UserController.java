@@ -74,16 +74,14 @@ public class UserController {
 
         String avatarBase64 = Base64.getEncoder().encodeToString(avatar.getBytes());
 
-        Users updateUser = new Users();
-        updateUser.setId(getUser.getId());
-        updateUser.setAvatar(avatarBase64);
-
+        getUser.setAvatar(avatarBase64);
+    
         if (avatar.getSize() > 5 * 1024 * 1024) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
             .body("Avatar file is too large. Maximum size is 5MB.");
         }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(userRepository.save(updateUser));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userRepository.save(getUser));
     }
 
 
