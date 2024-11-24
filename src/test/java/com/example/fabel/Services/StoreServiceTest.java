@@ -90,7 +90,7 @@ public class StoreServiceTest {
         Store createdStore = storeRepository.save(store); // Chamar o método do controlador
 
         assertNotNull(createdStore);
-        assertEquals("newStore", createdStore.getUser());
+        assertEquals("newUser", createdStore.getUser());
         verify(storeRepository).save(any(Store.class));
     }
 
@@ -126,14 +126,28 @@ public class StoreServiceTest {
         when(storeRepository.findById(1L)).thenReturn(Optional.of(store));
         when(storeRepository.save(any(Store.class))).thenReturn(store);
     
-        // Execução do método
-        Store result = gameController.updateGame(newGame);
+        Users newUser = new Users();
+
+        newUser.setUsername("newUser");
+        newUser.setEmail("newemail@gmail.com");
+        newUser.setPassword("newpassword");
+        newUser.setAvatar("");
+
+        when(userRepository.save(any(Users.class))).thenReturn(newUser);
+
+
+        store.setUser(newUser);
+
+        Store result = storeController.updateStore(store);
     
         // Verifica se o novo usuário não é nulo e foi salvo
         assertNotNull(result);
-        verify(gameRepository).save(any(Games.class));
+        assertEquals("idUser", result.getUser());
+        verify(storeRepository).save(any(Store.class));
 
     }
+
+
     //delete
     @Test
     void testDeleteStore() {
