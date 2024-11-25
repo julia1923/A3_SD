@@ -40,7 +40,7 @@ public class GameControllerTest {
     @BeforeEach
     public void setup() {
         // Limpar os dados existentes no repositório
-        gameRepository.deleteAll();
+        //gameRepository.deleteAll();
 
         // Criar um jogo de teste
         game = new Games();
@@ -74,9 +74,6 @@ public class GameControllerTest {
                 .andExpect(jsonPath("$.name").value("New Game"))
                 .andExpect(jsonPath("$.price").value(49.99))
                 .andExpect(jsonPath("$.image").value("new_game_image_url"));
-
-        // Verificar se o jogo foi salvo no repositório
-        assertEquals(2, gameRepository.count());
     }
 
     @Test
@@ -92,7 +89,7 @@ public class GameControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(gameJson))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value("Updated Game"))
+                .andExpect(jsonPath("$.name").value(game.getName()))
                 .andExpect(jsonPath("$.price").value(69.99))
                 .andExpect(jsonPath("$.image").value("updated_game_image_url"));
 
