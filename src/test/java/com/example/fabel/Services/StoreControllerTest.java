@@ -17,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -44,6 +45,7 @@ public class StoreControllerTest {
 
     private Users user;
     private Games game;
+    private Store store;
 
     @BeforeEach
     public void setup() {
@@ -64,7 +66,7 @@ public class StoreControllerTest {
         game.setImage("game_image_url");
         game = gameRepository.save(game);
 
-        Store store = new Store();
+        store = new Store();
         store.setUser(user);
         store.setGame(game);
         store = storeRepository.save(store);
@@ -108,12 +110,6 @@ public class StoreControllerTest {
     @Test
     public void testDeleteStore() throws Exception {
 
-        Store store = new Store();
-
-        store.setUser(user);
-
-        store.setGame(game);
-
         String storeJson = objectMapper.writeValueAsString(store);
 
         mockMvc.perform(delete("/store/deleteStore/" + store.getIdStore())
@@ -124,4 +120,10 @@ public class StoreControllerTest {
                 .andExpect(jsonPath("$.game.id", is(game.getId().intValue()))); 
     }
 
+    @Test
+    public void testGetAllStore() throws Exception {
+        mockMvc.perform(get("/store/all")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
 }
