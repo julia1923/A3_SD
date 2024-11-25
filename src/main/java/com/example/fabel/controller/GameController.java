@@ -41,14 +41,22 @@ public class GameController {
 
     @PutMapping("/updateGame")
     public Games updateGame(@RequestBody Games game){
+        System.out.println("\n\n\n\n\n\n\n\nsucesso" + game.getName());
+
         Games getGame = gameRepository.findById(game.getId()).orElseThrow();
 
+        System.out.println("\n\n\n\n\n\n\n\nsucesso2");
         Games updateGame = new Games();
         updateGame.setName(getGame.getName());
         updateGame.setPrice(getGame.getPrice());
         updateGame.setImage(getGame.getImage());
 
-        return gameRepository.save(updateGame);
+        System.out.println("\n\n\n\n\n\n\n\nsucesso3");
+
+        Games jogo = gameRepository.save(updateGame); 
+        System.out.println("qlqrcoisa");
+
+        return jogo;
     }
     
     @DeleteMapping ("/deleteGame/{id}")

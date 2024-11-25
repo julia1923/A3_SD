@@ -21,7 +21,7 @@ PUT http://localhost:8080/games/updateGame HTTP/1.1
 Content-Type: application/json
 
 {
-    "id" : 1,
+    "id" : 1352,
      "name" : "valorant",
     "price" : 0,
     "image" : ""  
