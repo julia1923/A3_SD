@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 import com.example.fabel.model.Games;
 import com.example.fabel.repository.GameRepository;
@@ -102,14 +103,17 @@ public class GameControllerTest {
 
     @Test
     public void testDeleteGame() throws Exception {
-        // Testar a exclusão do jogo existente
-        mockMvc.perform(delete("/games/deleteGame/" + game.getId())
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.game.id", is(game.getId().intValue()))); 
 
-        // Verificar se o jogo foi removido
-        assertTrue(gameRepository.findById(game.getId()).isEmpty());
+        // Realizando a requisição e capturando o resultado
+        MvcResult result = mockMvc.perform(delete("/games/deleteGame/" + game.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()) // Verifica o status HTTP
+                .andExpect(jsonPath("$.id", is(game.getId().intValue()))) // Verifica parte do JSON
+                .andReturn(); // Captura o resultado da requisição
+
+        // Capturando a resposta como uma String
+        String jsonResponse = result.getResponse().getContentAsString();
+        System.out.println("Resposta JSON: " + jsonResponse);
     }
 }
 

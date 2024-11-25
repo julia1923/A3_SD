@@ -26,4 +26,4 @@ Content-Type: application/json
 
 
 ###
-DELETE http://localhost:8080/store/deleteStore/202 HTTP/1.1
+DELETE http://localhost:8080/store/deleteStore/1107 HTTP/1.1
