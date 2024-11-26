@@ -15,5 +15,7 @@ public class Games {
     private Long id;
     private String name;
     private Double price;
+
+    @Column(name = "image", columnDefinition = "LONGTEXT")
     private String image;
 }
