@@ -1,0 +1,36 @@
+services:
+  mysql:
+    image: mysql:9.0 
+    container_name: fable-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_BIND_ADDRESS=0.0.0.0
+    ports:
+      - "${MYSQL_PORT}:3306"
+    expose:
+      - '${MYSQL_PORT}'
+    volumes:
+      - mysql-data:/var/lib/mysql
+    restart: unless-stopped
+
+  dbeaver:
+    image: dbeaver/cloudbeaver:latest 
+    container_name: fabledb_dbeaver
+    environment:
+      - CB_INIT_ROOT_USERNAME=${MYSQL_USER}       
+      - CB_INIT_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} 
+      - MYSQL_DATABASE=${MYSQL_DATABASE}    
+    ports:
+      - "${DBEAVER_PORT}:8978"
+    expose:
+      - '${DBEAVER_PORT}'
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    
+
+volumes:
+  mysql-data:
