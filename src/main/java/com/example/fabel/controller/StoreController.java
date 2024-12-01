@@ -72,4 +72,9 @@ public class StoreController {
 
         return getStore;
     }
+
+    @GetMapping("/userid")
+    public List<Store> findByUserId (@PathVariable Long id)
+    Store getStore = storeRepository.findByUserId(idUser).orElseThrow();
+    return getStore;
 }
