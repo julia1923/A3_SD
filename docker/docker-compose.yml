@@ -1,0 +1,31 @@
+services:
+
+  dbeaver:
+    image: dbeaver/cloudbeaver:latest 
+    container_name: dbeaver
+    env_file:
+      - ../.env
+    environment:
+      - CB_INIT_ROOT_USERNAME=${MYSQL_USER}       
+      - CB_INIT_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} 
+      - MYSQL_DATABASE=${MYSQL_DATABASE}    
+    ports:
+      - "8082:8978"
+    expose:
+      - '8082'
+    
+  db:
+    image: mysql:latest
+    container_name: fabel-db
+    restart: always
+    env_file:
+      - ../.env
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - fabel-db:/var/lib/mysql
+      
+volumes:
+  fabel-db:

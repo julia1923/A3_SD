@@ -1,0 +1,29 @@
+GET http://localhost:8080/ HTTP/1.1
+
+###
+GET http://localhost:8080/test_connection HTTP/1.1
+
+###
+GET http://localhost:8080/store/all HTTP/1.1
+
+###
+POST http://localhost:8080/store/addNewStore HTTP/1.1
+Content-Type: application/json
+
+{
+   "user" : {"id" : 152},
+   "game" : {"id" : 1}
+ }
+
+###
+PUT http://localhost:8080/store/updateStore HTTP/1.1
+Content-Type: application/json
+
+{
+     "user" : {"id" : 1},
+    "game" : {"id" : 1}
+}
+
+
+###
+DELETE http://localhost:8080/store/deleteStore/1107 HTTP/1.1

@@ -1,0 +1,52 @@
+GET http://localhost:8080/ HTTP/1.1
+
+###
+GET http://localhost:8080/test_connection HTTP/1.1
+
+###
+GET http://localhost:8080/users/all HTTP/1.1
+
+###
+POST http://localhost:8080/users/create HTTP/1.1
+Content-Type: application/json
+
+{
+    "username" : "julia",
+    "email" : "julia@gmail.com",
+    "password" : 12345,
+    "avatar" : ""  
+}
+
+###
+PUT http://localhost:8080/users/update HTTP/1.1
+Content-Type: application/json
+
+{
+    "id" : 152,
+    "username" : "ana",
+    "email" : "ana@gmail.com",
+    "password" : 123,
+    "avatar" : ""  
+}
+
+###
+PUT http://localhost:8080/users/updateAvatar
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="id"
+
+152
+--boundary
+Content-Disposition: form-data; name="avatar"; filename="avatar.png"
+Content-Type: image/png
+
+< /workspaces/A3_SD/homem-ferro.png
+
+--boundary--
+
+###
+GET http://localhost:8080/users/find/1 HTTP/1.1
+
+###
+DELETE http://localhost:8080/users/delete/102 HTTP/1.1
