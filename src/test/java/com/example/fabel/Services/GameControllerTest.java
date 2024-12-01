@@ -40,10 +40,7 @@ public class GameControllerTest {
 
     @BeforeEach
     public void setup() {
-        // Limpar os dados existentes no repositório
-        //gameRepository.deleteAll();
-
-        // Criar um jogo de teste
+        
         game = new Games();
         game.setName("Test Game");
         game.setPrice(59.99);
@@ -60,7 +57,7 @@ public class GameControllerTest {
 
     @Test
     public void testAddNewGame() throws Exception {
-        // Criar um novo jogo
+        
         Games newGame = new Games();
         newGame.setName("New Game");
         newGame.setPrice(49.99);
@@ -79,7 +76,7 @@ public class GameControllerTest {
 
     @Test
     public void testUpdateGame() throws Exception {
-        // Atualizar o jogo existente
+        
         game.setName("Updated Game");
         game.setPrice(69.99);
         game.setImage("updated_game_image_url");
@@ -94,7 +91,7 @@ public class GameControllerTest {
                 .andExpect(jsonPath("$.price").value(69.99))
                 .andExpect(jsonPath("$.image").value("updated_game_image_url"));
 
-        // Verificar se as alterações foram persistidas
+        
         Games updatedGame = gameRepository.findById(game.getId()).orElseThrow();
         assertEquals("Updated Game", updatedGame.getName());
         assertEquals(69.99, updatedGame.getPrice());
@@ -104,14 +101,14 @@ public class GameControllerTest {
     @Test
     public void testDeleteGame() throws Exception {
 
-        // Realizando a requisição e capturando o resultado
+        
         MvcResult result = mockMvc.perform(delete("/games/deleteGame/" + game.getId())
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()) // Verifica o status HTTP
-                .andExpect(jsonPath("$.id", is(game.getId().intValue()))) // Verifica parte do JSON
-                .andReturn(); // Captura o resultado da requisição
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(game.getId().intValue())))
+                .andReturn();
 
-        // Capturando a resposta como uma String
+        
         String jsonResponse = result.getResponse().getContentAsString();
         System.out.println("Resposta JSON: " + jsonResponse);
     }

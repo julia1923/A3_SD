@@ -126,4 +126,11 @@ public class StoreControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void testGetStoreByUserId() throws Exception {
+        mockMvc.perform(get("/store/user/" + user.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
 }

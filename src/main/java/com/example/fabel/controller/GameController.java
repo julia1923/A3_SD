@@ -64,8 +64,6 @@ public class GameController {
     public Games deleteGame(@PathVariable Long id){
         Games getGame = gameRepository.findById(id).orElseThrow();
         gameRepository.delete(getGame);
-        
-        System.out.println("\n\n\n\n\n\n\n\n\n\n" + getGame);
 
         return getGame;
     }
