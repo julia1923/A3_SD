@@ -34,7 +34,7 @@ public class AuthController {
             throw new IllegalArgumentException("Usuário ou senha inválidos.");
         }
 
-        String token = jwtTokenUtil.generateToken(user.getUsername(), user.getEmail());
+        String token = jwtTokenUtil.generateToken(user.getUsername(), user.getEmail(),Long.toString(user.getId()));
 
         return ResponseEntity.ok().body("{\"Bearer\": \"" + token + "\"}");
     }
