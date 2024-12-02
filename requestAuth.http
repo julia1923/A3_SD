@@ -1,0 +1,8 @@
+###
+POST http://localhost:8080/auth/login
+Content-Type: application/x-www-form-urlencoded
+
+username=julia@gmail.com&password=julia@gmail.com
+
+###
+GET http://localhost:8080/auth/

@@ -1,8 +1,3 @@
-GET http://localhost:8080/ HTTP/1.1
-
-###
-GET http://localhost:8080/test_connection HTTP/1.1
-
 ###
 GET http://localhost:8080/users/all HTTP/1.1
 
@@ -13,7 +8,7 @@ Content-Type: application/json
 {
     "username" : "julia",
     "email" : "julia@gmail.com",
-    "password" : 12345,
+    "password" : "julia@gmail.com",
     "avatar" : ""  
 }
 
