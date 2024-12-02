@@ -39,4 +39,4 @@ Content-Type: image/png
 --boundary--
 
 ###
-DELETE http://localhost:8080/games/deleteGame/360 HTTP/1.1
+DELETE http://localhost:8080/games/deleteGame/2 HTTP/1.1

@@ -47,7 +47,6 @@ public class GameController {
 
     @PutMapping("/updateGame")
     public Games updateGame(@RequestBody Games game){
-        System.out.println("\n\n\n\n\n\n\n\nsucesso" + game.getName());
 
         Games getGame = gameRepository.findById(game.getId()).orElseThrow();
 
@@ -64,8 +63,6 @@ public class GameController {
     public Games deleteGame(@PathVariable Long id){
         Games getGame = gameRepository.findById(id).orElseThrow();
         gameRepository.delete(getGame);
-        
-        System.out.println("\n\n\n\n\n\n\n\n\n\n" + getGame);
 
         return getGame;
     }
