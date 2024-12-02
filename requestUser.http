@@ -44,4 +44,4 @@ Content-Type: image/png
 GET http://localhost:8080/users/find/1 HTTP/1.1
 
 ###
-DELETE http://localhost:8080/users/delete/102 HTTP/1.1
+DELETE http://localhost:8080/users/delete/555 HTTP/1.1
