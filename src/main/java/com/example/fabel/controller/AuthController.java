@@ -34,10 +34,8 @@ public class AuthController {
             throw new IllegalArgumentException("Usuário ou senha inválidos.");
         }
 
-        // Gerar o token JWT com username e email
         String token = jwtTokenUtil.generateToken(user.getUsername(), user.getEmail());
 
-        // Criar o payload de resposta com a chave "Bearer" e o token
         return ResponseEntity.ok().body("{\"Bearer\": \"" + token + "\"}");
     }
 }

@@ -19,7 +19,6 @@ import com.example.fabel.repository.GameRepository;
 import com.example.fabel.repository.StoreRepository;
 import com.example.fabel.repository.UserRepository;
 
-
 @RestController
 @RequestMapping("/store")
 public class StoreController {
@@ -32,16 +31,15 @@ public class StoreController {
     GameRepository gameRepository;
 
     @GetMapping("/all")
-    public List<Store> getAllStore(){
+    public List<Store> getAllStore() {
         return storeRepository.findAll();
     }
-    
+
     @PostMapping("/addNewStore")
-    public Store addNewStore(@RequestBody Store store){
+    public Store addNewStore(@RequestBody Store store) {
 
         Users getUser = userRepository.findById(store.getUser().getId()).orElseThrow();
         Games getGame = gameRepository.findById(store.getGame().getId()).orElseThrow();
-
 
         Store addNewStore = new Store();
         addNewStore.setUser(getUser);
@@ -52,7 +50,7 @@ public class StoreController {
     }
 
     @PutMapping("/updateStore")
-    public Store updateStore(@RequestBody Store store){
+    public Store updateStore(@RequestBody Store store) {
 
         Users getUser = userRepository.findById(store.getUser().getId()).orElseThrow();
         Games getGame = gameRepository.findById(store.getGame().getId()).orElseThrow();
@@ -63,18 +61,17 @@ public class StoreController {
 
         return storeRepository.save(updateStore);
     }
-    
 
     @DeleteMapping("/deleteStore/{id}")
-    public Store deleteStore(@PathVariable Long id){
+    public Store deleteStore(@PathVariable Long id) {
         Store getStore = storeRepository.findById(id).orElseThrow();
         storeRepository.delete(getStore);
 
         return getStore;
     }
 
-    //@GetMapping("/userid")
-    //public List<Store> findByUserId (@PathVariable Long id)
-    //Store getStore = storeRepository.findByUserId(idUser).orElseThrow();
-    //return getStore;
+    @GetMapping("/user/{userId}")
+    public List<Store> getStoresByUserId(@PathVariable Long userId) {
+        return storeRepository.findByUserId(userId);
+    }
 }
