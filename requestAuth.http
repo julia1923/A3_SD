@@ -3,6 +3,3 @@ POST http://localhost:8080/auth
 Content-Type: application/x-www-form-urlencoded
 
 email=renan@gmail.com&password=renan@gmail.com
-
-###
-GET http://localhost:8080/auth/

@@ -39,10 +39,12 @@ public class Security {
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
+
         config.setAllowCredentials(true);
-        config.addAllowedOriginPattern("");
-        config.addAllowedHeader(""); 
+        config.addAllowedOriginPattern("https://stunning-telegram-q7xjv5g9xpxh94pw-5173.app.github.dev"); 
+        config.addAllowedHeader("*"); 
         config.addAllowedMethod("*"); 
+
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
