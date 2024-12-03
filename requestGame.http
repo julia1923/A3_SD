@@ -29,7 +29,7 @@ Content-Type: multipart/form-data; boundary=boundary
 --boundary
 Content-Disposition: form-data; name="id"
 
-602
+1
 --boundary
 Content-Disposition: form-data; name="avatar"; filename="avatar.png"
 Content-Type: image/png

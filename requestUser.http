@@ -6,9 +6,9 @@ POST http://localhost:8080/users/create HTTP/1.1
 Content-Type: application/json
 
 {
-    "username" : "renan",
-    "email" : "renan@gmail.com",
-    "password" : "renan@gmail.com",
+    "username" : "Julia",
+    "email" : "julia@Julia.com",
+    "password" : "1234",
     "avatar" : ""  
 }
 
@@ -44,4 +44,4 @@ Content-Type: image/png
 GET http://localhost:8080/users/find/1 HTTP/1.1
 
 ###
-DELETE http://localhost:8080/users/delete/752 HTTP/1.1
+DELETE http://localhost:8080/users/delete/1404  HTTP/1.1
