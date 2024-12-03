@@ -15,10 +15,10 @@ public class Store {
     private Long idStore;
 
     @ManyToOne
-    @JoinColumn(name = "idUser")
+    @JoinColumn(name = "idUser", nullable = false)
     private Users user;
 
     @ManyToOne
-    @JoinColumn(name = "idGame")
+    @JoinColumn(name = "idGame",nullable = false)
     private Games game;
 }

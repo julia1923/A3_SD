@@ -1,0 +1,5 @@
+###
+POST http://localhost:8080/auth
+Content-Type: application/x-www-form-urlencoded
+
+email=julia@julia.com&password=1234

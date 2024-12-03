@@ -8,6 +8,8 @@ import com.example.fabel.repository.StoreRepository;
 import com.example.fabel.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import jakarta.transaction.Transactional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.hamcrest.Matchers.is;
 
+@Transactional
 @SpringBootTest
 @AutoConfigureMockMvc
 public class StoreControllerTest {

@@ -13,8 +13,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.http.MediaType;
 
 import com.example.fabel.model.Users;
+import com.example.fabel.repository.StoreRepository;
 import com.example.fabel.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jakarta.transaction.Transactional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -23,6 +26,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
+@Transactional
 @SpringBootTest
 @AutoConfigureMockMvc
 public class UserControllerTest {
@@ -36,15 +40,18 @@ public class UserControllerTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private StoreRepository storeRepository;
+
     @BeforeEach
     public void setup() {
-        // Limpar os dados existentes no repositório
+        storeRepository.deleteAll();
         userRepository.deleteAll();
     }
 
     @Test
     public void testGetAllUsers() throws Exception {
-        // Criar um usuário de teste
+    
         Users user = new Users();
         user.setUsername("testUser");
         user.setEmail("testUser@example.com");
@@ -52,7 +59,7 @@ public class UserControllerTest {
         user.setAvatar("avatar_url");
         userRepository.save(user);
 
-        // Verificar a lista de usuários
+        
         mockMvc.perform(get("/users/all")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -60,7 +67,7 @@ public class UserControllerTest {
 
     @Test
     public void testCreateUser() throws Exception {
-        // Criar um novo usuário
+        
         Users newUser = new Users();
         newUser.setUsername("newUser");
         newUser.setEmail("newUser@example.com");
@@ -77,13 +84,13 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.email").value("newUser@example.com"))
                 .andExpect(jsonPath("$.avatar").value("new_avatar_url"));
 
-        // Verificar se o usuário foi salvo no repositório
+       
         assertEquals(1, userRepository.count());
     }
 
     @Test
     public void testUpdateUser() throws Exception {
-        // Criar um usuário existente
+        
         Users user = new Users();
         user.setUsername("testUser");
         user.setEmail("testUser@example.com");
@@ -91,7 +98,7 @@ public class UserControllerTest {
         user.setAvatar("avatar_url");
         user = userRepository.save(user);
 
-        // Atualizar os dados do usuário
+        
         user.setUsername("updatedUser");
         user.setEmail("updatedUser@example.com");
         user.setPassword("newpassword");
@@ -107,7 +114,7 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.email").value("updatedUser@example.com"))
                 .andExpect(jsonPath("$.avatar").value("updated_avatar_url"));
 
-        // Verificar se as mudanças foram persistidas
+        
         Users updatedUser = userRepository.findById(user.getId()).orElseThrow();
         assertEquals("updatedUser", updatedUser.getUsername());
         assertEquals("updatedUser@example.com", updatedUser.getEmail());
@@ -115,7 +122,7 @@ public class UserControllerTest {
 
     @Test
     public void testDeleteUser() throws Exception {
-        // Criar um usuário existente
+        
         Users user = new Users();
         user.setUsername("testUser");
         user.setEmail("testUser@example.com");
@@ -123,7 +130,7 @@ public class UserControllerTest {
         user.setAvatar("avatar_url");
         user = userRepository.save(user);
 
-        // Deletar o usuário
+        
         mockMvc.perform(delete("/users/delete/" + user.getId())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -131,13 +138,13 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.email").value("testUser@example.com"))
                 .andExpect(jsonPath("$.avatar").value("avatar_url"));
 
-        // Verificar se o usuário foi removido
+        
         assertTrue(userRepository.findById(user.getId()).isEmpty());
     }
 
     @Test
     public void testFindById() throws Exception {
-        // Criar um usuário existente
+        
         Users user = new Users();
         user.setUsername("testUser");
         user.setEmail("testUser@example.com");
@@ -145,7 +152,7 @@ public class UserControllerTest {
         user.setAvatar("avatar_url");
         user = userRepository.save(user);
 
-        // Buscar o usuário pelo ID
+       
         mockMvc.perform(get("/users/find/" + user.getId())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
