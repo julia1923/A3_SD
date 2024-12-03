@@ -41,7 +41,7 @@ public class Security {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.addAllowedOriginPattern("https://stunning-telegram-q7xjv5g9xpxh94pw-5173.app.github.dev"); 
+        config.addAllowedOriginPattern("*"); 
         config.addAllowedHeader("*"); 
         config.addAllowedMethod("*"); 
 

@@ -21,7 +21,7 @@ Content-Type: application/json
 
 
 ###
-DELETE http://localhost:8080/store/deleteStore/357 HTTP/1.1
+DELETE http://localhost:8080/store/deleteStore/804 HTTP/1.1
 
 ###
-GET http://localhost:8080/store/user/1 HTTP/1.1
+GET http://localhost:8080/store/user?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKdWxpYSIsImVtYWlsIjoianVsaWFASnVsaWEuY29tIiwiaWQiOiIxIiwiaWF0IjoxNzMzMjQyMjc4LCJleHAiOjE3MzMzMjg2Nzh9.YZulrx_EpBaPVabV9V1WUdiRW8cLmNcrsHQ6cdF_15k HTTP/1.1
