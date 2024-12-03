@@ -6,8 +6,8 @@ POST http://localhost:8080/games/addNewGame HTTP/1.1
 Content-Type: application/json
 
 {
-    "name" : "CS GO",
-    "price" : 10,
+    "name" : "CS:GO",
+    "price" : 0.00,
     "image" : ""
 }
 
@@ -16,9 +16,9 @@ PUT http://localhost:8080/games/updateGame HTTP/1.1
 Content-Type: application/json
 
 {
-    "id" : 1252,
-    "name" : "valorant",
-    "price" : 0,
+    "id" : 552,
+    "name" : "Mortal Kombat",
+    "price" : 90,
     "image" : ""  
 }
 
@@ -29,14 +29,14 @@ Content-Type: multipart/form-data; boundary=boundary
 --boundary
 Content-Disposition: form-data; name="id"
 
-2760
+602
 --boundary
 Content-Disposition: form-data; name="avatar"; filename="avatar.png"
 Content-Type: image/png
 
-< /workspaces/A3_SD/homem-ferro.png
+< /workspaces/A3_SD/csgo-image.png
 
 --boundary--
 
 ###
-DELETE http://localhost:8080/games/deleteGame/2 HTTP/1.1
+DELETE http://localhost:8080/games/deleteGame/502 HTTP/1.1

@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.http.MediaType;
 
 import com.example.fabel.model.Users;
+import com.example.fabel.repository.StoreRepository;
 import com.example.fabel.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -39,8 +40,12 @@ public class UserControllerTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private StoreRepository storeRepository;
+
     @BeforeEach
     public void setup() {
+        storeRepository.deleteAll();
         userRepository.deleteAll();
     }
 
