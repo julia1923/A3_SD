@@ -9,9 +9,9 @@ To install Java in your codespace, run the following command:
     sdk install java 21.0.5-oracle
 ```
 Check if the installation was sucessful by running:
-    ```bash
+```
         java -version
-     ``` 
+``` 
 
 - REST Client
 Make sure you have REST Client extension installed.
