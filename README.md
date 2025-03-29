@@ -14,6 +14,7 @@ Check if the installation was sucessful by running:
 ``` 
 
 - REST Client
+
 Make sure you have REST Client extension installed.
 ___
 
