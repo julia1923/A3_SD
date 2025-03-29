@@ -1,49 +1,40 @@
-# Fabel
+# Fable
 
-### Prerequisites
-- Have java installed 
-    - to check the installation:
+### PREREQUISITES
+
+- Java
+
+To install Java in your codespace, run the following command:
+```bash
+    sdk install java 21.0.5-oracle
+```
+Check if the installation was sucessful by running:
     ```bash
         java -version
      ``` 
-    - Install java in codespace
-    ```bash
-        sdk install java 21.0.5-oracle
-    ```
-- Have maven installed
-    - to check the installation:
-    ```bash 
-        mvn -version 
-    ``` 
+
+- REST Client
+Make sure you have REST Client extension installed.
 ___
 
-### How to run the project without docker
+### ENVIRONMENT SETUP
 
+1.Copy the default.env file to the root of the project directory.
+2. Rename the copied file to .env.
+3. Open .env file and fill the required values. You can use placeholder values, but ensure you provide valid information
 
-1. cleans up old files, compiles the code, runs the tests, and installs the artifact in the local repository.
-    ```bash
-    mvn clean install
-    ```
-
-2. runs a Spring Boot application directly from the source code, without needing to package the project in a .jar file first. It compiles and starts the application.
-    ```bash
-    mvn spring-boot:run
-    ```
+4. Open the application.properties file.
+5. Change the properties in application.properties to match the same variables defined in the .env file.
 ___
 
-### How to run the project with docker
+### RUNNING THE PROJECT
 
-1. Raises all the services necessary to run the program with docker compose
-```bash
-    docker compose -f docker/docker-compose.yml up  
+1. In your terminal, run the following command to start the necessary containers:
+```
+    docker compose -f docker/docker-compose.yml up
 ```
 
-### How to connect with database
-1. using mysql client
-    - To install 
-    - ``` sudo apt install mysql-client```
-    - To Connect 
-    - ``` mysql -h [host] -u [user] -p ```
-    
-2. by container
-    - ``` docker exec -it [container_name] mysql -u root -p```
+2. Open another terminal and type:
+```
+    mvn spring-boot:run
+```
