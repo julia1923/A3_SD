@@ -20,6 +20,7 @@ ___
 
 ### ENVIRONMENT SETUP
 
+
 1.Copy the default.env file to the root of the project directory.
 2. Rename the copied file to .env.
 3. Open .env file and fill the required values. You can use placeholder values, but ensure you provide valid information
